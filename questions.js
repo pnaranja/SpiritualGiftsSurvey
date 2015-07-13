@@ -1,9 +1,7 @@
-document.write("hello!");
 
-var message = function(msg){
+var message = function(msg,qnum){
   var container  = document.createElement('div');
-  container.id = 'idtest';
-  container.class = 'classtest';
+  container.id = 'q_' + qnum;
   container.appendChild(document.createTextNode(msg));
 
   return container;
@@ -18,7 +16,7 @@ function readFile(evt){
         r.onload = function(e){
         var contents = e.target.result;
         alert("Got file " + f.name);
-        document.body.appendChild(message(r.result));
+        document.getElementById('questions').innerHTML = "<div>hello!</div>"; //message(r.result,1);
         };
 
         r.readAsText(f);
