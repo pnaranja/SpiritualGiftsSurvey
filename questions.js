@@ -81,7 +81,6 @@ var the_questions = {
 80 : 'I feel assured that a situation will change for the glory of God even when the situation seem impossible.'};
 
 
-
 var message = function(msg,qnum){
   var container  = document.createElement('div');
   container.id = 'q_' + qnum;
