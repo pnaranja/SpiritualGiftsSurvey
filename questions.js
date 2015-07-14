@@ -80,37 +80,37 @@ var the_questions = {
 79 : 'I have a wide range of study resources and know how to secure information.',
 80 : 'I feel assured that a situation will change for the glory of God even when the situation seem impossible.'};
 
+var submit_btn = function(){
+  return "<input type='submit' value='Submit'></input>";
+};
 
-var response_choices = function(choice_num){
+var response_choices = function(choice_num,qnum){
   var radiobtn = document.createElement('input');
   radiobtn.type = 'radio';
-  radiobtn.name = 'check_'+choice_num;
+  radiobtn.name = 'ans_'+qnum;
+  radiobtn.value = choice_num;
 
   return choice_num + radiobtn.outerHTML;
 };
 
 var message = function(msg,qnum){
-  //var container  = document.createElement('div');
-  //container.id = 'q_' + qnum;
-  //container.appendChild(document.createTextNode(qnum+". "+msg));
-
-  //return container.outerHTML;
   return qnum + '. ' + msg + '<br>';
 };
 
-var question = function(msgtext,qnum){
-  var frm  = document.createElement('form');
-  frm.id = 'q_' + qnum;
-  frm.innerHTML = message(msgtext,qnum);
+var create_question = function(msgtext,qnum){
+  var question  = document.createElement('div');
+  question.id = 'q_' + qnum;
+  question.innerHTML = message(msgtext,qnum);
 
   [1,2,3,4,5].forEach(function(choice_num){
-    frm.innerHTML += response_choices(choice_num);
+    question.innerHTML += response_choices(choice_num,qnum);
     });
 
-  return frm.outerHTML+'<br>';
+  return question.outerHTML+'<br>';
 };
 
 
 for (var i in the_questions){
-  document.getElementById('questions').innerHTML += question(the_questions[i],i);
+  document.getElementById('questions').innerHTML += create_question(the_questions[i],i);
 }
+document.getElementById('questions').innerHTML += submit_btn();
