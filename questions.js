@@ -81,13 +81,36 @@ var the_questions = {
 80 : 'I feel assured that a situation will change for the glory of God even when the situation seem impossible.'};
 
 
-var message = function(msg,qnum){
-  var container  = document.createElement('div');
-  container.id = 'q_' + qnum;
-  container.appendChild(document.createTextNode(qnum+". "+msg));
+var response_choices = function(choice_num){
+  var radiobtn = document.createElement('input');
+  radiobtn.type = 'radio';
+  radiobtn.name = 'check_'+choice_num;
 
-  return container.outerHTML;
+  return choice_num + radiobtn.outerHTML;
 };
 
-for (var i in the_questions)
-  document.getElementById('questions').innerHTML += message(the_questions[i],i);
+var message = function(msg,qnum){
+  //var container  = document.createElement('div');
+  //container.id = 'q_' + qnum;
+  //container.appendChild(document.createTextNode(qnum+". "+msg));
+
+  //return container.outerHTML;
+  return qnum + '. ' + msg + '<br>';
+};
+
+var question = function(msgtext,qnum){
+  var frm  = document.createElement('form');
+  frm.id = 'q_' + qnum;
+  frm.innerHTML = message(msgtext,qnum);
+
+  [1,2,3,4,5].forEach(function(choice_num){
+    frm.innerHTML += response_choices(choice_num);
+    });
+
+  return frm.outerHTML+'<br>';
+};
+
+
+for (var i in the_questions){
+  document.getElementById('questions').innerHTML += question(the_questions[i],i);
+}
