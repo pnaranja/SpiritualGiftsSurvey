@@ -81,7 +81,14 @@ var the_questions = {
 80 : 'I feel assured that a situation will change for the glory of God even when the situation seem impossible.'};
 
 var submit_btn = function(){
-  return "<input type='submit' value='Submit'></input>";
+  return "<input type='button' value='Submit Answers!' onClick='check_ans(this.form)'></input>";
+};
+
+var check_ans = function(form){
+  var ans1 = document.getElementsByName('ans_1');
+  for (var ans in ans1)
+    if(ans1[ans].checked)
+      alert('Answer 1 is checked!');
 };
 
 var response_choices = function(choice_num,qnum){
@@ -98,8 +105,8 @@ var message = function(msg,qnum){
 };
 
 var create_question = function(msgtext,qnum){
-  var question  = document.createElement('div');
-  question.id = 'q_' + qnum;
+  var question  = document.createElement('fieldset');
+  question.name = 'q_' + qnum;
   question.innerHTML = message(msgtext,qnum);
 
   [1,2,3,4,5].forEach(function(choice_num){
