@@ -103,7 +103,7 @@ var check_ans = function(question_num){
   return false;
 };
 
-var response_choices = function(choice_num,qnum){
+var create_ans = function(choice_num,qnum){
   var radiobtn = document.createElement('input');
   radiobtn.type = 'radio';
   radiobtn.name = 'ans_'+qnum;
@@ -122,7 +122,7 @@ var create_question = function(msgtext,qnum){
   question.innerHTML = message(msgtext,qnum);
 
   [1,2,3,4,5].forEach(function(choice_num){
-    question.innerHTML += response_choices(choice_num,qnum);
+    question.innerHTML += create_ans(choice_num,qnum);
     });
 
   return question.outerHTML+'<br>';
