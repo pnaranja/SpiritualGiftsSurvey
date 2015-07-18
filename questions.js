@@ -81,14 +81,26 @@ var the_questions = {
 80 : 'I feel assured that a situation will change for the glory of God even when the situation seem impossible.'};
 
 var submit_btn = function(){
-  return "<input type='button' value='Submit Answers!' onClick='check_ans(this.form)'></input>";
+  return "<input type='button' value='Submit Answers!' onClick='check_all_ans()'></input>";
 };
 
-var check_ans = function(form){
-  var ans1 = document.getElementsByName('ans_1');
+var check_all_ans = function(){
+  var all_questions_answered = true;
+  for (var i=1; i<=80; i++)
+    if(!check_ans(i))
+      all_questions_answered = false;
+
+  if(!all_questions_answered)
+    alert('Please answer all questions');
+};
+
+var check_ans = function(question_num){
+  var ans1 = document.getElementsByName('ans_'+question_num);
   for (var ans in ans1)
     if(ans1[ans].checked)
-      alert('Answer 1 is checked!');
+      return true;
+
+  return false;
 };
 
 var response_choices = function(choice_num,qnum){
