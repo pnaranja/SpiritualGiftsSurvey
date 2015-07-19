@@ -84,11 +84,22 @@ var submit_btn = function(){
   return "<input type='button' value='Submit Answers!' onClick='check_all_ans()'></input>";
 };
 
+var highlight_question = function(q_num){
+  document.getElementById('q_'+q_num).className = 'highlight';
+};
+
+var clear_highlight_question = function(q_num){
+  document.getElementById('q_'+q_num).removeAttribute('class');
+};
+
 var check_all_ans = function(){
   var all_questions_answered = true;
+  var questions_not_answered = [];
   for (var i=1; i<=80; i++)
-    if(!check_ans(i))
+    if(!check_ans(i)){
       all_questions_answered = false;
+      questions_not_answered.push(i);
+    }
 
   if(!all_questions_answered)
     alert('Please answer all questions');
@@ -118,7 +129,7 @@ var message = function(msg,qnum){
 
 var create_question = function(msgtext,qnum){
   var question  = document.createElement('fieldset');
-  question.name = 'q_' + qnum;
+  question.id = 'q_' + qnum;
   question.innerHTML = message(msgtext,qnum);
 
   [1,2,3,4,5].forEach(function(choice_num){
