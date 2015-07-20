@@ -100,9 +100,16 @@ var check_all_ans = function(){
       all_questions_answered = false;
       questions_not_answered.push(i);
     }
+  else
+    clear_highlight_question(i);
 
-  if(!all_questions_answered)
+  if(!all_questions_answered){
+    questions_not_answered.forEach(function(q){
+      highlight_question(q);
+    });
+    
     alert('Please answer all questions');
+  }
 };
 
 var check_ans = function(question_num){
