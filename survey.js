@@ -8,8 +8,9 @@ var clear_highlight_question = function(q_num){
 
 var is_question_highlighted = function(q_num){
   return document.getElementById('q_'+q_num).className === 'highlight';
-}
+};
 
+//Checks if all questions have been answered
 var check_all_ans = function(){
   var all_questions_answered = true;
   var questions_not_answered = [];
@@ -31,6 +32,7 @@ var check_all_ans = function(){
   }
 };
 
+//Checks if a particular questions has been answered
 var check_ans = function(question_num){
   var ans1 = document.getElementsByName('ans_'+question_num);
   for (var ans in ans1)
@@ -40,6 +42,8 @@ var check_ans = function(question_num){
   return false;
 };
 
+//Creates the possible answers for each question
+//Retuns the radio button html
 var create_ans = function(choice_num,qnum){
   var radiobtn = document.createElement('input');
   radiobtn.type = 'radio';
@@ -49,14 +53,15 @@ var create_ans = function(choice_num,qnum){
   return choice_num + radiobtn.outerHTML;
 };
 
-var message = function(msg,qnum){
+var question_message = function(msg,qnum){
   return qnum + '. ' + msg + '<br>';
 };
 
+//Creates a question within a fieldset
 var create_question = function(msgtext,qnum){
   var question  = document.createElement('fieldset');
   question.id = 'q_' + qnum;
-  question.innerHTML = message(msgtext,qnum);
+  question.innerHTML = question_message(msgtext,qnum);
 
   [1,2,3,4,5].forEach(function(choice_num){
     question.innerHTML += create_ans(choice_num,qnum);
