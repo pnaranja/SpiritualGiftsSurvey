@@ -14,6 +14,7 @@ var is_question_highlighted = function(q_num){
 var check_all_ans = function(){
   var all_questions_answered = true;
   var questions_not_answered = [];
+
   for (var i=1; i<=80; i++){
     if(!check_ans(i)){
       all_questions_answered = false;
@@ -23,6 +24,7 @@ var check_all_ans = function(){
         clear_highlight_question(i);
   }
 
+  //highlight all unanswered questions and show alert
   if(!all_questions_answered){
     questions_not_answered.forEach(function(q){
       highlight_question(q);
@@ -33,6 +35,7 @@ var check_all_ans = function(){
 };
 
 //Checks if a particular questions has been answered
+//Returns true if question was answered
 var check_ans = function(question_num){
   var ans1 = document.getElementsByName('ans_'+question_num);
   for (var ans in ans1)
@@ -74,6 +77,8 @@ var submit_btn = function(){
   return "<input type='button' value='Submit Answers!' onClick='check_all_ans()'></input>";
 };
 
+
+//Initial code to create questions and submit button
 for (var i in the_questions){
   document.getElementById('questions').innerHTML += create_question(the_questions[i],i);
 }
