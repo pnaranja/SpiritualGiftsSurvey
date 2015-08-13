@@ -32,6 +32,8 @@ var check_all_ans = function(){
     
     alert('Please answer all questions');
   }
+  else
+    score_survey(get_all_ans());
 };
 
 //Checks if a particular questions has been answered
@@ -44,6 +46,30 @@ var check_ans = function(question_num){
 
   return false;
 };
+
+
+//Return object of answers
+var get_all_ans = function(){
+  all_ans = {};
+
+  for (var i = 1; i<=80; i++)
+    all_ans[i] = get_ans(document.getElementsByName('ans_'+i));
+ 
+  return all_ans;
+};
+
+
+//Return answer for a particular question
+var get_ans = function(question_element){
+  for (var i = 0; i<5; i++){
+    if (question_element[i].checked)
+      return i+1;
+  }
+ 
+  //Return -1 if question is not answered
+  return -1;
+};
+
 
 //Creates the possible answers for each question
 //Retuns the radio button html
