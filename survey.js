@@ -15,7 +15,7 @@ var check_all_ans = function(){
   var all_questions_answered = true;
   var questions_not_answered = [];
 
-  for (var i=1; i<=80; i++){
+  for (var i=1; i<=Object.keys(the_questions).length; i++){
     if(!check_ans(i)){
       all_questions_answered = false;
       questions_not_answered.push(i);
@@ -39,7 +39,7 @@ var check_all_ans = function(){
 //Checks if a particular questions has been answered
 //Returns true if question was answered
 var check_ans = function(question_num){
-  var ans1 = document.getElementsByName('ans_'+question_num);
+  var ans1 = document.getElementsByName('ques_'+question_num);
   for (var ans in ans1)
     if(ans1[ans].checked)
       return true;
@@ -49,25 +49,26 @@ var check_ans = function(question_num){
 
 
 //Return object of answers
+//Only called when all questions are answered
 var get_all_ans = function(){
   all_ans = {};
 
-  for (var i = 1; i<=80; i++)
-    all_ans[i] = get_ans(document.getElementsByName('ans_'+i));
- 
-  return all_ans;
-};
+  //Turn NodeList->Array
+  for (var i = 1; i<=Object.keys(the_questions).length; i++)
+    all_ans[i] = get_ans(
+      Array.prototype.slice.call(document.getElementsByName('ques_'+i)));
+
+  return all_ans;};
 
 
 //Return answer for a particular question
-var get_ans = function(question_element){
-  for (var i = 0; i<5; i++){
-    if (question_element[i].checked)
-      return i+1;
-  }
- 
-  //Return -1 if question is not answered
-  return -1;
+//Only called when the question has been answered
+var get_ans = function(question_elem_array){
+  var the_choice = question_elem_array.filter(function(choice){
+      return choice.checked;
+  });
+
+  return the_choice[0].value;
 };
 
 
@@ -76,7 +77,8 @@ var get_ans = function(question_element){
 var create_ans = function(choice_num,qnum){
   var radiobtn = document.createElement('input');
   radiobtn.type = 'radio';
-  radiobtn.name = 'ans_'+qnum;
+  radiobtn.name = 'ques_'+qnum;
+  radiobtn.id = 'ans_'+choice_num;
   radiobtn.value = choice_num;
 
   return choice_num + radiobtn.outerHTML;
