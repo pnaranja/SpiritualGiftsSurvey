@@ -129,7 +129,8 @@ d3.select("body").selectAll("p")
 var circleRadii = [40,20,10];
 var svgContainer = d3.select("body").append("svg")
                 .attr("width",200)
-                .attr("height",200);
+                .attr("height",200)
+                .style("border", "1px solid black");
 
 var circles = svgContainer.selectAll("circle")
                 .data(circleRadii)
@@ -147,4 +148,29 @@ var circleAttributes = circles
                     case 10: return "red"; break;
                     default: return "black";
                   }
+                });
+
+
+var spaceCircles = [30,70,100];
+var svcContainer2 = d3.select("body").append("svg")
+                .attr("width",200)
+                .attr("height",200)
+                .style("border", "1px solid black");
+
+var circles2 = svcContainer2.selectAll("circle")
+                .data(spaceCircles)
+                .enter()
+                .append("circle");
+
+var circleAttributes2 = circles2
+                .attr("cx", function(d){return d;})
+                .attr("cy", function(d){return d;})
+                .attr("r", 20)
+                .style("fill", function(d){
+                switch(d){
+                    case 30: return "green"; break;
+                    case 70: return "purple"; break;
+                    case 100: return "red"; break;
+                    default: return "black";
+                    }
                 });
