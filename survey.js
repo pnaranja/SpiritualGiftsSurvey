@@ -174,3 +174,24 @@ var circleAttributes2 = circles2
                     default: return "black";
                     }
                 });
+
+var jsonCircles = [
+  { "x-axis": 30, "y-axis": 30, "radius": 20, "color": "green"},
+  { "x-axis": 70, "y-axis": 70, "radius": 20, "color": "purple"},
+  { "x-axis": 110, "y-axis": 100, "radius": 20, "color": "red"}];
+
+var svcContainer3 = d3.select("body").append("svg")
+                .attr("width",200)
+                .attr("height",200)
+                .style("border", "1px solid black");
+
+var circles3 = svcContainer3.selectAll("circle")
+                .data(jsonCircles)
+                .enter()
+                .append("circle");
+
+var circleAttributes3 = circles3
+                .attr("cx", function(d){return d["x-axis"];})
+                .attr("cy", function(d){return d["y-axis"];})
+                .attr("r", function(d){return d["radius"];})
+                .style("fill", function(d){return d["color"];});
