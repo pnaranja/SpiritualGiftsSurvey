@@ -67,12 +67,12 @@ var circleAttributes = circles
 d3.select("body").append("p");
 
 var spaceCircles = [30,70,100];
-var svcContainer2 = d3.select("body").append("svg")
+var svgContainer2 = d3.select("body").append("svg")
                 .attr("width",200)
                 .attr("height",200)
                 .style("border", "1px solid black");
 
-var circles2 = svcContainer2.selectAll("circle")
+var circles2 = svgContainer2.selectAll("circle")
                 .data(spaceCircles)
                 .enter()
                 .append("circle");
@@ -98,12 +98,12 @@ var jsonCircles = [
   { "x-axis": 70, "y-axis": 70, "radius": 20, "color": "purple"},
   { "x-axis": 110, "y-axis": 100, "radius": 20, "color": "red"}];
 
-var svcContainer3 = d3.select("body").append("svg")
+var svgContainer3 = d3.select("body").append("svg")
                 .attr("width",200)
                 .attr("height",200)
                 .style("border", "1px solid black");
 
-var circles3 = svcContainer3.selectAll("circle")
+var circles3 = svgContainer3.selectAll("circle")
                 .data(jsonCircles)
                 .enter()
                 .append("circle");
@@ -118,27 +118,49 @@ var circleAttributes3 = circles3
 
 d3.select("body").append("p");
 
-var svcContainer4 = d3.select("body").append("svg")
+var svgContainer4 = d3.select("body").append("svg")
                 .attr("width",400)
                 .attr("height",400)
                 .style("border", "1px solid black");
 
-var rectangle = svcContainer4.append("rect")
+var rectangle = svgContainer4.append("rect")
                 .attr("x", 10)
                 .attr("y", 10)
                 .attr("width", 100)
                 .attr("height", 50);
 
-var ellipse = svcContainer4.append("ellipse")
+var ellipse = svgContainer4.append("ellipse")
                 .attr("cx", 150)
                 .attr("cy", 150)
                 .attr("rx", 25)
                 .attr("ry", 10);
 
-var line = svcContainer4.append("line")
+var line = svgContainer4.append("line")
                 .attr("x1", 250)
                 .attr("y1", 250)
                 .attr("x2", 350)
                 .attr("y2", 10)
                 .attr("stroke-width", 5)
                 .attr("stroke", "black");
+
+//Using D3 Paths
+var lineFunction = d3.svg.line()
+                .x(function(d) {return d.x})
+                .y(function(d) {return d.y})
+                .interpolate("linear");
+
+//The data for our line
+var lineData = [ { "x": 1,   "y": 5},  { "x": 20,  "y": 20},
+                 { "x": 40,  "y": 10}, { "x": 60,  "y": 40},
+                 { "x": 80,  "y": 5},  { "x": 100, "y": 60}];
+
+var svgContainer5 = d3.select("body").append("svg")
+                .attr("width",400)
+                .attr("height",400)
+                .style("border", "1px solid black");
+
+var lineGraph = svgContainer5.append("path")
+                .attr("d", lineFunction(lineData))
+                .attr("stroke", "blue")
+                .attr("stroke-width", 5)
+                .attr("fill", "none");
