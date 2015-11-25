@@ -13,32 +13,26 @@ var is_question_highlighted = function(q_num){
 //Checks if all questions have been answered
 var check_all_ans = function(){
   var all_questions_answered = true;
-  var questions_not_answered = [];
 
   for (var i=1; i<=Object.keys(the_questions).length; i++){
-    if(!check_ans(i)){
+    if(!check_if_ans(i)){
       all_questions_answered = false;
-      questions_not_answered.push(i);
+      highlight_question(i)
     }
     else if(is_question_highlighted)
         clear_highlight_question(i);
   }
 
   //highlight all unanswered questions and show alert
-  if(!all_questions_answered){
-    questions_not_answered.forEach(function(q){
-      highlight_question(q);
-    });
-    
+  if(!all_questions_answered)
     alert('Please answer all questions');
-  }
   else
     score_survey(get_all_ans());
 };
 
 //Checks if a particular questions has been answered
 //Returns true if question was answered
-var check_ans = function(question_num){
+var check_if_ans = function(question_num){
   var ans1 = document.getElementsByName('ques_'+question_num);
   for (var ans in ans1)
     if(ans1[ans].checked)
