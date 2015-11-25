@@ -48,9 +48,12 @@ var get_all_ans = function(){
   all_ans = {};
 
   //Turn NodeList->Array
-  for (var i = 1; i<=Object.keys(the_questions).length; i++)
+  for (var i = 1; i<=Object.keys(the_questions).length; i++){
     all_ans[i] = get_ans(
       Array.prototype.slice.call(document.getElementsByName('ques_'+i)));
+
+    all_ans[i] = Number(all_ans[i]);
+  }
 
   return all_ans;};
 
@@ -74,6 +77,8 @@ var create_ans = function(choice_num,qnum){
   radiobtn.name = 'ques_'+qnum;
   radiobtn.id = 'ans_'+choice_num;
   radiobtn.value = choice_num;
+
+  radiobtn.checked = choice_num === 5 ? true : false;
 
   return choice_num + radiobtn.outerHTML;
 };
@@ -106,86 +111,3 @@ for (var i in the_questions){
 }
 document.getElementById('questions').innerHTML += submit_btn();
 
-//D3 examples
-d3.select("body").append("svg")
-.attr("width",50).attr("height",50).append("circle")
-.attr("cx",25).attr("cy",25).attr("r",25)
-.style("fill","purple"); 
-
-var theData = [1,2,3];
-d3.select("body").selectAll("p")
-.data(theData)
-.enter()
-.append("p")
-.text(function(x,a) {return "Hello"+x+" "+a;});
-
-
-var circleRadii = [40,20,10];
-var svgContainer = d3.select("body").append("svg")
-                .attr("width",200)
-                .attr("height",200)
-                .style("border", "1px solid black");
-
-var circles = svgContainer.selectAll("circle")
-                .data(circleRadii)
-                .enter()
-                .append("circle");
-
-var circleAttributes = circles
-                .attr("cx", 50)
-                .attr("cy", 50)
-                .attr("r", function(d){return d;})
-                .style("fill",function(d){
-                  switch(d){
-                    case 40: return "green"; break;
-                    case 20: return "purple"; break;
-                    case 10: return "red"; break;
-                    default: return "black";
-                  }
-                });
-
-
-var spaceCircles = [30,70,100];
-var svcContainer2 = d3.select("body").append("svg")
-                .attr("width",200)
-                .attr("height",200)
-                .style("border", "1px solid black");
-
-var circles2 = svcContainer2.selectAll("circle")
-                .data(spaceCircles)
-                .enter()
-                .append("circle");
-
-var circleAttributes2 = circles2
-                .attr("cx", function(d){return d;})
-                .attr("cy", function(d){return d;})
-                .attr("r", 20)
-                .style("fill", function(d){
-                switch(d){
-                    case 30: return "green"; break;
-                    case 70: return "purple"; break;
-                    case 100: return "red"; break;
-                    default: return "black";
-                    }
-                });
-
-var jsonCircles = [
-  { "x-axis": 30, "y-axis": 30, "radius": 20, "color": "green"},
-  { "x-axis": 70, "y-axis": 70, "radius": 20, "color": "purple"},
-  { "x-axis": 110, "y-axis": 100, "radius": 20, "color": "red"}];
-
-var svcContainer3 = d3.select("body").append("svg")
-                .attr("width",200)
-                .attr("height",200)
-                .style("border", "1px solid black");
-
-var circles3 = svcContainer3.selectAll("circle")
-                .data(jsonCircles)
-                .enter()
-                .append("circle");
-
-var circleAttributes3 = circles3
-                .attr("cx", function(d){return d["x-axis"];})
-                .attr("cy", function(d){return d["y-axis"];})
-                .attr("r", function(d){return d["radius"];})
-                .style("fill", function(d){return d["color"];});
