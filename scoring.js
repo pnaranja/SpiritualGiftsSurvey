@@ -24,3 +24,4 @@ var mercy = function(ans){return ans[7]+ans[22]+ans[37]+ans[52]+ans[66];};
 var giving = function(ans){return ans[8]+ans[23]+ans[38]+ans[53]+ans[67];};
 var hospitality = function(ans){return ans[15]+ans[32]+ans[45]+ans[60]+ans[78];};
 
+var gifts = [leadership, administration, teaching, knowledge, wisdom, prophecy, discernment, exhortation, shepherding, faith, evangelism, apostleship, service, mercy, giving, hospitality];
