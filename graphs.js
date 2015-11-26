@@ -1,5 +1,13 @@
-function creategraph(ans){
+//Helper generator to set the y-axis for each bar graph
+nextyaxis = function*(){
+    for(i = 0; true; i++)
+        yield 10+60*i;
+}
+
+//Creates the bar graphs representing the different types of gifts
+function creategiftgraphs(ans){
     var graphscale = 40;
+    var genY = nextyaxis();
 
     var graphContainer = d3.select("form").append("p").append("svg")
                     .attr("width",1200)
@@ -8,20 +16,24 @@ function creategraph(ans){
   
 
     var leadership_rect = graphContainer.append("rect")
-                    .attr("x", 150)
-                    .attr("y", 10)
+                    .attr("x", 0)
+                    .attr("y", genY.next().value)
                     .attr("width", leadership(ans)*graphscale)
-                    .attr("height", 50);
+                    .attr("height", 50)
+                    .style("fill", "purple");
 
-    d3.select("form").append("br");
+    var leadership_label = leadership_rect.append("text")
+                    .text(function(){return "Leadership"})
+                    .style("color", "white");
 
-    var administration_rect = leadership_rect.append("rect")
-                    .attr("x", 150)
-                    .attr("y", 10)
+
+    var administration_rect = graphContainer.append("rect")
+                    .attr("x", 0)
+                    .attr("y", genY.next().value)
                     .attr("width", administration(ans)*graphscale)
-                    .attr("height", 50);
+                    .attr("height", 50)
+                    .style("fill", "green");
 
-    d3.select("form").append("br");
 }
 
 

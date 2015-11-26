@@ -1,3 +1,9 @@
+// Returns a random integer between min (included) and max (excluded)
+// Using Math.round() will give you a non-uniform distribution!
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 var highlight_question = function(q_num){
   document.getElementById('q_'+q_num).className = 'highlight';
 };
@@ -106,7 +112,7 @@ var submit_btn = function(){
 //Initial code to create questions and submit button
 for (var i in the_questions){
     document.getElementById('questions').innerHTML += create_question(the_questions[i],i);
-    document.getElementsByName('ques_'+i.toString())[0].setAttribute('checked',true); //For setting an initial value (debugging purposes)
+    document.getElementsByName('ques_'+i.toString())[getRandomInt(1,5)].setAttribute('checked',true); //For setting an initial value (debugging purposes)
 }
 document.getElementById('questions').innerHTML += submit_btn();
 

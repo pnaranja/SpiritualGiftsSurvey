@@ -2,7 +2,7 @@
 var score_survey = function(answers){
   console.log("Answers from the survey:\n");
   console.log(answers);
-  creategraph(answers);
+  creategiftgraphs(answers);
 };
 
 
