@@ -87,6 +87,18 @@ var create_ans = function(choice_num,qnum){
   return choice_num + radiobtn.outerHTML;
 };
 
+//Create a set of radio button answers
+var create_answers = function(qnum){
+  var answers = document.createElement('div');
+  answers.className = 'questions';
+
+  [1,2,3,4,5].forEach(function(choice_num){
+    answers.innerHTML += create_ans(choice_num,qnum);
+    });
+
+    return answers.outerHTML;
+}
+
 var question_message = function(msg,qnum){
   return qnum + '. ' + msg + '<br>';
 };
@@ -96,10 +108,7 @@ var create_question = function(msgtext,qnum){
   var question  = document.createElement('fieldset');
   question.id = 'q_' + qnum;
   question.innerHTML = question_message(msgtext,qnum);
-
-  [1,2,3,4,5].forEach(function(choice_num){
-    question.innerHTML += create_ans(choice_num,qnum);
-    });
+  question.innerHTML += create_answers(qnum);
 
   return question.outerHTML+'<br>';
 };
