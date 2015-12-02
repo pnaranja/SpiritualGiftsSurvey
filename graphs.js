@@ -13,6 +13,11 @@ nextcolor = function*(){
     }
 }
 
+//Helper prototype function to delete elements
+Element.prototype.remove = function(){
+    this.parentElement.removeChild(this);
+}
+
 //Creates the bar graphs representing the different types of gifts
 function creategiftgraphs(ans){
     var graphscale = 40;
@@ -22,7 +27,13 @@ function creategiftgraphs(ans){
 
     var gift_ans = gifts.map(function(gift){return gift(ans);});
 
-    var graphContainer = d3.select("form").append("p").append("svg")
+    //Remove the questions and directions
+    document.getElementById("questions").remove();
+    document.getElementById("directions").remove();
+
+    document.getElementById("title").innerHTML = "Spiritual Gifts Survey Answers";
+
+    var graphContainer = d3.select("body").append("p").append("svg")
                     .attr("width",1200)
                     .attr("height",980)
                     .style("border", "1px solid black");
